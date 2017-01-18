@@ -4,7 +4,7 @@ node('master') {
     git branch: 'database', url: 'https://github.com/scav/jenkins-docker-test.git'
     
     stage 'Run tests'
-    sh "echo $(whoami)"
+    println "$(whoami)"
     def db = docker.image('postgres').withRun('-p 5432:5432 -P --name db -e POSTGRES_DB=jenkinstest -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test') { db ->
         docker.image('localhost:5000/gradle').inside('-P --name g2 --link db:db') {
             sh 'gradle clean build'
