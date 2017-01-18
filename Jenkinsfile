@@ -1,4 +1,4 @@
-node('docker-slave') {
+node('master') {
 
     stage 'Checkout git'
     git branch: 'database', url: 'https://github.com/scav/jenkins-docker-test.git'
